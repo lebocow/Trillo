@@ -20,6 +20,32 @@
   --line: 0.1rem solid var(--color-grey-light-2);
 }
 
+@mixin gradientAnimation($start, $end, $transTime) {
+  background-size: 100%;
+  background-image: linear-gradient(to right, $start, $end);
+  position: relative;
+  z-index: 100;
+  &:before {
+    background-image: linear-gradient(to right, $end, $start);
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    z-index: -100;
+    transition: opacity $transTime;
+  }
+  &:hover {
+    &:before {
+      opacity: 1;
+    }
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
