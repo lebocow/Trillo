@@ -6,12 +6,18 @@
 }
 
 //////////////////////////////////////////////////
-/// SEARCH BOX
+/// SEARCH
 .search {
   flex: 0 0 40%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media only screen and (max-width: $bp-smallest) {
+    order: 1;
+    flex: 0 0 100%;
+    background-color: var(--color-grey-light-2);
+  }
 
   &__input {
     font-family: inherit;
@@ -51,6 +57,11 @@
 
     &:active {
       transform: translateY(0.2rem);
+    }
+  }
+  &__datalist {
+    option {
+      background-color: red;
     }
   }
 
@@ -112,6 +123,69 @@
     border-radius: 50%;
     margin-right: 1rem;
   }
+
+  &__user {
+    position: relative;
+  }
+
+  &__pop-up {
+    position: absolute;
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-grey-light-1),
+      var(--color-grey-light-3)
+    );
+    // height: 20rem;
+    top: 85%;
+    left: -20rem;
+    padding: 1.5rem 2rem;
+    opacity: 0;
+    z-index: 100;
+    width: 30rem;
+    padding-top: 1.5rem;
+    color: var(--color-grey-dark-1);
+    border-radius: 2rem;
+    transition: all 0.4s;
+
+    box-shadow: 0rem 0.5rem 3rem rgba(0, 0, 0, 0.3);
+
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      margin-bottom: 1.5rem;
+    }
+
+    &-main {
+      border-top: var(--line-thicker);
+
+      &-content {
+        padding: 1rem 1rem 0;
+        list-style: none;
+
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+
+        &--element {
+        }
+      }
+    }
+
+    &--show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // &__user-photo:hover ~ &__pop-up {
+  //   opacity: 1;
+  //   visibility: visible;
+  // }
 }
 
 //////////////////////////////////////////////////
@@ -121,11 +195,24 @@
   list-style: none;
   margin-top: 3.5rem;
 
+  @media only screen and (max-width: $bp-medium) {
+    display: flex;
+    margin: 0;
+  }
+
   &__item {
     position: relative;
 
     &:not(:last-child) {
       margin-bottom: 0.5rem;
+
+      @media only screen and (max-width: $bp-medium) {
+        margin: 0;
+      }
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      flex: 1;
     }
   }
 
@@ -165,6 +252,16 @@
 
     display: flex;
     align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      flex-direction: column;
+      padding: 1.5rem 2rem;
+    }
   }
 
   &__icon {
@@ -172,6 +269,13 @@
     height: 1.75rem;
     margin-right: 2rem;
     fill: currentColor;
+
+    @media only screen and (max-width: $bp-small) {
+      margin-right: 0;
+      margin-bottom: 0.7rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }
 
@@ -182,15 +286,59 @@
   color: var(--color-grey-light-4);
   text-align: center;
   padding: 2.5rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    display: none;
+  }
 }
 
 //////////////////////////////////////////////////
 /// GALLERY
 .gallery {
   display: flex;
+  overflow: hidden;
+
+  &__item {
+    position: relative;
+  }
+
+  &__item:hover &__caption {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
+  &__item:hover &__photo {
+    // transform: scale(1);
+    filter: blur(0.4rem) brightness(60%);
+    // z-index: 0;
+  }
+
   &__photo {
     width: 100%;
     display: block;
+    transition: all 0.3s;
+    // z-index: 1;
+    position: relative;
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    font-size: 2rem;
+    opacity: 0;
+    transition: all 0.4s;
+    color: whitesmoke;
+    text-align: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      font-size: 1.8rem;
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      font-size: 1.6rem;
+    }
   }
 }
 
@@ -207,6 +355,11 @@
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     padding: 1.5rem 3rem;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.8rem;
+      padding: 1.25rem 2rem;
+    }
   }
 
   &__stars {
@@ -243,15 +396,27 @@
     justify-content: center;
     flex-direction: column;
 
+    @media only screen and (max-width: $bp-small) {
+      padding: 0 1.5rem;
+    }
+
     &-average {
       font-size: 2.25rem;
       font-weight: 300;
       margin-bottom: -0.3rem;
+
+      @media only screen and (max-width: $bp-small) {
+        font-size: 1.8rem;
+      }
     }
 
     &-count {
       font-size: 0.8rem;
       text-transform: uppercase;
+
+      @media only screen and (max-width: $bp-small) {
+        font-size: 0.5rem;
+      }
     }
   }
 }
@@ -336,15 +501,18 @@
     margin-right: 0.7rem;
 
     //older browsers
-    // background-image: url(../img/chevron-thin-right.svg);
-    // background-size: cover;
+    background-image: url(../img/chevron-thin-right.svg);
+    background-size: cover;
 
     //new browsers - masks
-    background-color: var(--color-primary);
-    -webkit-mask-image: url(../img/chevron-thin-right.svg);
-    mask-image: url(../img/chevron-thin-right.svg);
-    -webkit-mask-size: cover;
-    mask-size: cover;
+    @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+      background-color: var(--color-primary);
+      -webkit-mask-image: url(../img/chevron-thin-right.svg);
+      mask-image: url(../img/chevron-thin-right.svg);
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      background-image: none;
+    }
   }
 }
 
@@ -362,6 +530,7 @@
   }
 
   &__friends {
+    display: flex;
   }
 
   &__photo {
@@ -372,7 +541,7 @@
     border: 0.3rem solid var(--color-white);
 
     &:not(:last-child) {
-      margin-right: -1.5rem;
+      margin-right: -2rem;
     }
   }
 }
@@ -386,6 +555,11 @@
   margin-bottom: 3.5rem;
   position: relative;
   overflow: hidden;
+
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
 
   &__text {
     margin-bottom: 2rem;
@@ -444,6 +618,10 @@
   padding: 3.5rem 0;
   text-align: center;
 
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2.5rem 0;
+  }
+
   &__book-now {
     font-size: 2rem;
     font-weight: 300;
@@ -466,8 +644,6 @@
   );
   overflow: hidden;
   color: var(--color-white);
-  -webkit-transition: background-image 1s ease-in-out;
-  transition: background-image 1s ease-in-out;
 
   & > * {
     display: inline-block;

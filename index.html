@@ -22,7 +22,13 @@
             type="text"
             class="search__input"
             placeholder="Search hotels"
+            list="hotels"
           />
+          <datalist id="hotels" class="search__datalist">
+            <option value="Habibi Hotel"></option>
+            <option value="Rakiki Hotel"></option>
+            <option value="Hawaii Hotel"></option>
+          </datalist>
           <button class="search__button">
             <svg class="search__icon">
               <use href="img/sprite.svg#icon-magnifying-glass" />
@@ -44,13 +50,45 @@
             </svg>
             <span class="user-nav__notification">13</span>
           </div>
-          <div class="user-nav__user">
+          <div onclick="popUp()" class="user-nav__user">
             <img
-              src="img/user.jpg"
+              src="img/alex.png"
               alt="User Photo"
               class="user-nav__user-photo"
             />
             <span class="user-nav__user-name">Alex</span>
+
+            <div class="user-nav__pop-up">
+              <div class="user-nav__pop-up-header">
+                <img
+                  src="img/alex.png"
+                  alt="User Photo"
+                  class="user-nav__user-photo"
+                />
+                <span class="user-nav__user-name"
+                  >Ursachianu Ionut-Alexandru</span
+                >
+              </div>
+              <div class="user-nav__pop-up-main">
+                <ul class="user-nav__pop-up-main-content">
+                  <li class="user-nav__pop-up-main-content--element">
+                    Settings & privacy
+                  </li>
+                  <li class="user-nav__pop-up-main-content--element">
+                    Help & support
+                  </li>
+                  <li class="user-nav__pop-up-main-content--element">
+                    Display & accessibility
+                  </li>
+                  <li class="user-nav__pop-up-main-content--element">
+                    Give feedback
+                  </li>
+                  <li class="user-nav__pop-up-main-content--element">
+                    Log Out
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </nav>
       </header>
@@ -102,13 +140,16 @@
                 alt="Photo of hotel 1"
                 class="gallery__photo"
               />
+              <figcaption class="gallery__caption">Armania Hotel</figcaption>
             </figure>
+
             <figure class="gallery__item">
               <img
                 src="img/hotel-2.jpg"
                 alt="Photo of hotel 2"
                 class="gallery__photo"
               />
+              <figcaption class="gallery__caption">Giovani Hotel</figcaption>
             </figure>
             <figure class="gallery__item">
               <img
@@ -116,6 +157,7 @@
                 alt="Photo of hotel 3"
                 class="gallery__photo"
               />
+              <figcaption class="gallery__caption">Kelmani Hotel</figcaption>
             </figure>
           </div>
 
@@ -256,5 +298,6 @@
         </main>
       </div>
     </div>
+    <script src="index.js"></script>
   </body>
 </html>
